@@ -1,18 +1,43 @@
 <template>
   <nav>
     <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/rooms">Rooms</router-link>
   </nav>
+  <div style='float:right; margin-right: 20px;' @click='changeTheme'>Тема {{ theme }}</div>
   <router-view/>
 </template>
+<script>
+import socket from './services/socket-service.js'
 
+export default {
+  name: 'App',
+  data() {
+    return {
+      theme: 'light'
+    }
+  },
+  components: {},
+  created() {
+    socket.setupSocketConnection();
+  },
+  methods: {
+    changeTheme() {
+      if (this.theme == 'light') this.theme = 'dark'
+      else this.theme = 'light'
+    }
+  },
+  beforeUnmount() {
+    socket.disconnect();
+  }
+}
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #000000;
 }
 
 nav {
