@@ -24,6 +24,7 @@ class SocketioService {
 	subscribeToMessages(cb) {
 		if (!this.socket) return(true);
 		this.socket.on('message', msg => {
+			
 			return cb(null, msg);
 		});
 	}

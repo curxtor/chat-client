@@ -9,12 +9,9 @@
         <div class='personMessageText'>{{message.msg}}</div>
         <div class='personMessageTime'>{{message.date}}</div>
       </div>
-      <div class='myMessage'>
-        Hello
-      </div>
     </div>
     <div class='messages'>
-      <input style='width:75%; height: 5vh; font-size:20px; outline: none; border-radius: 15px; border: 1px solid black;' v-model='message'/>
+      <input @keypress.enter="sendMessage" style='width:75%; height: 5vh; font-size:20px; outline: none; border-radius: 15px; border: 1px solid black;' v-model='message'/>
       <div class='sendMessage' @click='sendMessage'>
         Send Message
       </div>
@@ -39,7 +36,7 @@ export default {
   },
   methods: {
     sendMessage() {
-      //socket.sendMessage(this.user, this.room, this.message)
+      socket.sendMessage(this.user, this.room, this.message)
       this.messages.push({
         id: this.messages[this.messages.length-1].id + 1,
         user: this.user,
@@ -73,7 +70,15 @@ export default {
     },
     checkMessages() {
       socket.subscribeToMessages((err, data) => {
-        console.log(data);
+        console.log(this.messages.length, data)
+        let t = {
+          id: 1,
+          user: data[0],
+          msg: data[1],
+          date: new Date().toISOString().replace('T', ' ').split('.')[0]
+        }
+        this.messages.push(t)
+        this.scrollToLast()
       });
     },
     scrollToLast() {
