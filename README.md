@@ -1,24 +1,8 @@
-# chat-client
+# VueJS Simple Chat Client App
 
-## Project setup
+## [DEMO](https://curxtor.github.io/chat-client/)
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
+Explore my demo:)
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
